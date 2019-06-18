@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script src="jquery-1.10.2.min.js"></script>
+        <script src="raphael-2.1.0.min.js"></script>
+        <script src="kartograph.js"></script>
+        
+<script type="text/javascript">
+    $(function() {
+        var map = kartograph.map('#map', 600, 400);
+        map.loadMap('usa.svg', function() {
+            map.addLayer('layer0', {
+                styles: {
+                    stroke: '#aaa',
+                    fill: '#f6f4f2'
+                },
+                mouseenter: function(d, path) {
+                 //   path.attr('fill', Math.random() < 0.5 ? '#c04' : '#04c');
+                },
+                mouseleave: function(d, path) {
+                 //   path.animate({ fill: '#f6f4f2' }, 1000);
+                }
+            });
+            var points_of_interest = [
+{ name: 'New York', lat: 40.7528, lon:-73.9725 }, { name: 'Chicago', lat: 41.9288, lon:-87.6315 }, { name: 'Atlanta', lat: 33.8477, lon:-84.2814 }, { name: 'Seattle', lat: 47.6026, lon:-122.3284 }, { name: 'Boston', lat: 42.3496, lon:-71.0746 }, { name: 'San Francisco', lat: 37.7312, lon:-122.3826 }, { name: 'Washington', lat: 38.8749, lon:-77.0325 }, { name: 'Minneapolis', lat: 45.0059, lon:-93.4305 }, { name: 'Austin', lat: 30.2058, lon:-97.8002 }, { name: 'Portland', lat: 45.4691, lon:-122.5535 }, { name: 'Phoenix', lat: 33.5586, lon:-112.0955 }, { name: 'Denver', lat: 39.7525, lon:-104.9995 }, { name: 'Charlotte', lat: 35.1232, lon:-80.9343 }, { name: 'Dallas', lat: 32.7825, lon:-96.8207 }, { name: 'Philadelphia', lat: 39.9524, lon:-75.1653 }, { name: 'Indianapolis', lat: 39.793, lon:-86.2853 }, { name: 'Salt Lake City', lat: 40.7608, lon:-111.8911 }, { name: 'Bellevue', lat: 47.5527, lon:-122.1479 }, { name: 'Raleigh', lat: 35.8181, lon:-78.5636 }, { name: 'Wilmington', lat: 39.4611, lon:-83.8172 }, { name: 'Las Vegas', lat: 36.11, lon:-115.2118 }, { name: 'Nashville', lat: 36.1473, lon:-86.777 }, { name: 'Columbus', lat: 39.8928, lon:-82.9588 }, { name: 'Cincinnati', lat: 39.1666, lon:-84.5465 }, { name: 'Los Angeles', lat: 34.0396, lon:-118.2661 }, { name: 'Arlington', lat: 38.86, lon:-77.0987 }, { name: 'Houston', lat: 29.8688, lon:-95.538 }, { name: 'Kansas City', lat: 39.1068, lon:-94.566 }, { name: 'Pittsburgh', lat: 40.4495, lon:-79.988 }, { name: 'Baltimore', lat: 39.2904, lon:-76.6122 }, { name: 'Scottsdale', lat: 33.4912, lon:-111.9237 }, { name: 'Omaha', lat: 41.2079, lon:-96.1183 }, { name: 'Detroit', lat: 42.3679, lon:-83.1386 }, { name: 'Tampa', lat: 27.943, lon:-82.524 }, { name: 'Louisville', lat: 38.0858, lon:-85.8495 }, { name: 'Madison', lat: 36.2558, lon:-86.6991 }, { name: 'Milwaukee', lat: 43.0434, lon:-87.8945 }, { name: 'Herndon', lat: 38.9841, lon:-77.3827 }, { name: 'Alpharetta', lat: 34.133, lon:-84.3005 }, { name: 'Miami', lat: 25.9388, lon:-80.2144 },
+            ];
+            map.addSymbols({
+                type: kartograph.LabeledBubble,
+                data: points_of_interest,
+                location: function(d) { return [d.lon, d.lat] },
+                title: function(d) { return d.name; },
+                radius: 3,
+                center: false,
+                attrs: { fill: 'black' },
+                labelattrs: { 'font-size': 11 },
+                buffer: true
+            });
+        }, { padding: 30 });
+    });
+</script>
+                
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>US Map Demo</title>
+	
+	<style>
+	  #alert {
+	    font-family: Arial, Helvetica, sans-serif;
+	    font-size: 16px;
+	    background-color: #ddd;
+	    color: #92beed;
+	    padding: 5px;
+	    font-weight: bold;
+	  }
+	</style>
+	
+	<script src="../lib/raphael.js"></script>
+	<!-- <script src="scale.raphael.js"></script> -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
+	<script src="color.jquery.js"></script>
+	<script src="../lib/us-map.js"></script>
+	
+<script>$(document).ready(function() {
+	
+	
+	  $('#map').usmap({
+	    'stateSpecificStyles': {
+	      'AK' : {fill: '#92beed'}
+ },
+	  });
+	  $('#map').usmap({    'stateStyles': {      fill: '#f2f2f2',       "stroke-width": 1,      'stroke' : '#e6e6e6'	    },
+	    });  });	</script>
+</head>
+<body>
+
+  <div id="map" style="width: 465px; height:315px; border: solid 3px grey;"></div>
+  
+</body>
+</html>

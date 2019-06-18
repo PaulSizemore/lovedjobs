@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>USA Projection</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="">
+   <meta name="author" content="">
+
+	<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="k.css" type="text/css" />
+
+
+
+   <link rel="stylesheet" href="/js/highlight/styles/github.css" type="text/css" />
+
+   <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+   <script type="text/javascript" src="raphael-2.1.0.min.js"></script>
+   <script type="text/javascript" src="kartograph.js"></script>
+
+</head>
+<body>
+
+
+		<div class="container">
+		<div class="row">
+			<div class="span6 offset6">
+				&nbsp;
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3 sidebar">
+				<div class="head">
+					<p class="tagline">A simple and lightweight framework for creating beautiful, interactive vector maps.</p>
+				</div>
+
+				
+					
+						
+						<div class="toc">
+							<h3>Showcases</h3>
+
+							<ul>
+								
+									
+									
+									<li><a href="/showcase/animated-symbols">Animated Symbols</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/italia">La Bella Italia</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/choropleth">Choropleth Maps</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/symbols">Symbol Maps</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/clustering">Clustering Map Symbols</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/charts">Chart Maps</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/dotgrid">Dot-grid Maps</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/3d">3D-Projections</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/projections">Map Projections</a></li>
+									
+								
+									
+									
+									<li><a href="/showcase/eastcoast">High-res vector mapping</a></li>
+									
+								
+							</ul>
+						</div>
+						
+					
+				
+
+			</div>
+
+			<div class="span9">
+				
+				<div class="content">
+						<h1><small style="float:right; font-size: 12px; font-family:Georgia">(<a href="https://github.com/kartograph/kartograph.org/blob/master/showcase/usa-projection/index.html">view source</a>)</small>USA Projection</h1>
+
+	<script type="text/javascript">
+
+    $(function() {
+
+        var map = kartograph.map('#map');
+
+        map.loadMap('usa.svg', function() {
+
+            map.addLayer('layer0', {
+                styles: {
+                    stroke: '#aaa',
+                    fill: '#f6f4f2'
+                },
+                mouseenter: function(d, path) {
+                    path.attr('fill', Math.random() < 0.5 ? '#c04' : '#04c');
+                },
+                mouseleave: function(d, path) {
+                    path.animate({ fill: '#f6f4f2' }, 1000);
+                }
+            });
+
+            var points_of_interest = [
+                { name: 'Juneau, AK', lat: 58.3, lon: -134.416667 },
+                { name: 'Honolulu, HI', lat: 21.3, lon: -157.816667 },
+                { name: 'San Francisco, CA', lat: 37.783333, lon: -122.416667 },
+            ];
+
+            map.addSymbols({
+                type: kartograph.LabeledBubble,
+                data: points_of_interest,
+                location: function(d) { return [d.lon, d.lat] },
+                title: function(d) { return d.name; },
+                radius: 3,
+                center: false,
+                attrs: { fill: 'black' },
+                labelattrs: { 'font-size': 11 },
+                buffer: true
+            });
+
+        }, { padding: 30 });
+    });
+
+</script>
+
+<div id="map"></div>
+
+<p style="text-align:right">(<a href="http://jsfiddle.net/vis4/d8m9A/" target="_blank">edit on JsFiddle</a>)</p>
+
+<p>This is the YAML configuration used to <a href="http://kartograph.org/docs/kartograph.py/#using-kartograph-py">create</a> the <a href="usa.svg">SVG map</a>. The shapefiles are taken from <a href="http://gadm.org/download">GADM</a> and <a href="http://www.naturalearthdata.com/downloads/10m-physical-vectors">Natural Earth</a>:</p>
+
+<pre><code class="yaml">proj:
+    id: laea-usa
+layers:
+    layer0:
+        src: 'shp/USA_adm1.shp'
+        attributes:
+            key: code
+            label: NAME_1
+        simplify: 1
+    lakes:
+        src: 'shp/ne_10m_lakes.shp'
+        subtract-from: 'layer0'
+        filter:
+            scalerank: 0
+export:
+    round: 0
+    width: 1000
+    crop: false
+</code></pre>
+
+</div>
+
+<script type="text/javascript" src="/js/highlight/highlight.pack.js"></script>
+<script type="text/javascript">
+
+    $('pre code').each(function(i, e) {
+        var code = $(e).html().trim(), 
+            code2 = code.replace(/\s/g, ''),
+            last = code2.substr(code2.length-1, 1);
+
+        if (code.substr(0,1) == '"' && (last == '}' || last == ']')) {
+            e.className = 'json';
+            $(e).html('{'+code+'}');
+            hljs.highlightBlock(e);
+            var i = $(e).html()
+            $(e).html(i.substr(1, i.length-2));
+            return;
+        } else if (last == ';') {
+            e.className = 'javascript';
+        }
+
+        hljs.highlightBlock(e)
+    });
+
+</script>
+
+				</div>
+				<div class="footer">
+					&copy; Copyright 2012-2014. Created by <a href="http://driven-by-data.net">Gregor Aisch</a>.
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.kartograph.org/" : "http://piwik.kartograph.org/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 14);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://piwik.kartograph.org/piwik.php?idsite=14" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+</body>
+</html>
+

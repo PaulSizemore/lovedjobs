@@ -1,0 +1,6 @@
+# robots.txt for http://lovedjobs.com/
+
+User-agent: *
+Disallow: /wp/ # This is an infinite virtual URL space
+Disallow: /mobile # This is an infinite virtual URL space
+Disallow: /m # This is an infinite virtual URL space
